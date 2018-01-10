@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "ProducerQueue.h"
 #include "Producer.h"
 #include "Dispatcher.h"
@@ -13,22 +14,27 @@ int main() {
     SortedNewsQueue* sortedWeatherQueue = new SortedNewsQueue("Weather");
     SortedNewsQueue* screenManagerQueue = new SortedNewsQueue("Screen Manager");
 
-    vector<string>* producer1_news = new vector<string>();
-    producer1_news->push_back("producer 1 sport 0"); producer1_news->push_back("producer 1 news 0"); producer1_news->push_back("producer 1 weather 1");
-
-    vector<string>* producer2_news = new vector<string>();
-    producer2_news->push_back("producer 2 sport 0"); producer2_news->push_back("producer 2 news 0"); producer2_news->push_back("producer 2 weather 1");
-
-    vector<string>* producer3_news = new vector<string>();
-    producer3_news->push_back("producer 3 sport 0"); producer3_news->push_back("producer 3 news 0"); producer3_news->push_back("producer 3 weather 1");
-
-    vector<string>* producer4_news = new vector<string>();
-    producer4_news->push_back("producer 4 sport 0"); producer4_news->push_back("producer 4 news 0"); producer4_news->push_back("producer 4 weather 1");
-
-
     vector<ProducerQueue*>* producersQueuesVector = new vector<ProducerQueue*>();
-
+    vector<Producer*>* producerVector = new vector<Producer*>();
     // Create ProducerQueue queues
+    ifstream inFile("configure.txt");
+    string type;
+    string newsCounter;
+    string queueSize;
+    int producerCounter = 0;
+    while(1){
+        getline(inFile, type);
+        if (type == "C")
+            break;
+        producerCounter++;
+        getline(inFile, newsCounter);
+        getline(inFile, queueSize);
+        ProducerQueue* pq = new ProducerQueue(stoi(queueSize));
+        producersQueuesVector->push_back(pq);
+        producerVector->push_back(new Producer(producerCounter, stoi(newsCounter), pq));
+    }
+
+
     ProducerQueue* pq1 = new ProducerQueue(2);
     ProducerQueue* pq2 = new ProducerQueue(1);
     ProducerQueue* pq3 = new ProducerQueue(3);
@@ -36,16 +42,16 @@ int main() {
 
 
     // Create Producer(s) (N threads)
-    Producer* producer1 = new Producer(1, producer1_news, pq1);
+    Producer* producer1 = new Producer(1, 5, pq1);
     producersQueuesVector->push_back(pq1);
 
-    Producer* producer2 = new Producer(2, producer2_news, pq2);
+    Producer* producer2 = new Producer(2, 7, pq2);
     producersQueuesVector->push_back(pq2);
 
-    Producer* producer3 = new Producer(3, producer3_news, pq3);
+    Producer* producer3 = new Producer(3, 6, pq3);
     producersQueuesVector->push_back(pq3);
 
-    Producer* producer4 = new Producer(4, producer4_news, pq4);
+    Producer* producer4 = new Producer(4, 8, pq4);
     producersQueuesVector->push_back(pq4);
 
 
@@ -72,5 +78,8 @@ int main() {
     screenManager->start();
     
     screenManager->waitForThread();
+
+    cout << "Press any key to exit." << endl;
+    getchar();
     return 0;
 }

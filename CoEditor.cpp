@@ -17,8 +17,7 @@ void CoEditor::run() {
     do{
         msg = readFromQueue();
         pushToScreenManagerQueue(msg);
-        cout << "[" << this->editorName << " CoEditor] " << "received \"" << msg << "\"" << endl;
-
+        // cout << "[" << this->editorName << " CoEditor] " << "received \"" << msg << "\"" << endl;
     }
     while(msg != "DONE");
     pushToScreenManagerQueue("DONE");

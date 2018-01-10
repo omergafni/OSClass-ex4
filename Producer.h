@@ -19,13 +19,14 @@ class Producer : public MThread{
     vector<string>* news;
     ProducerQueue* producerQueue;
 
+    string randomType();
     void pushNew(string news);
 
 public:
-    Producer(int id, vector<string> *news, ProducerQueue *producerQueue);
 
+    Producer(int id, int newsNumber, ProducerQueue *producerQueue);
     void run() override;
-
+    vector<string>* generateNews(int number);
 };
 
 
