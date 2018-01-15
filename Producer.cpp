@@ -22,7 +22,7 @@ void Producer::pushNew(string news) {
 
 void Producer::run() {
     while(!(this->news->empty())){
-        cout << "[Producer " << this->id << "] " << "pushing message \"" << this->news->back() << "\""<< endl;
+        // cout << "[Producer " << this->id << "] " << "pushing message \"" << this->news->back() << "\""<< endl;
         pushNew(this->news->back());
         this->news->pop_back();
     }

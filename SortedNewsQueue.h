@@ -12,12 +12,13 @@ class SortedNewsQueue : public BlockingQueue{
 
 private:
     string queueName;
+    int maxQueueSize;
 
 public:
     string pop() override;
     void push(string item) override;
 
-    SortedNewsQueue(const string &queueName);
+    SortedNewsQueue(const string &queueName, int maxQueueSize);
 };
 
 

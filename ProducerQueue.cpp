@@ -35,7 +35,7 @@ void ProducerQueue::push(string item) {
     }
 
     this->queue.push(item);
-    cout << "[ProducerQueue] " << "received \"" << item<< "\"" << endl;
+    // cout << "[ProducerQueue] " << "received \"" << item<< "\"" << endl;
     mlock.unlock();
 }
 

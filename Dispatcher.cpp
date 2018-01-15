@@ -28,15 +28,15 @@ void Dispatcher::pushToSortedNewsQueue(string news) {
 
     if (news.find("news") != std::string::npos) {
         this->newsQueue->push(news);
-        cout << "[Dispatcher] " << "pushed \"" << news << "\"" << " to news queue"<< endl;
+        // cout << "[Dispatcher] " << "pushed \"" << news << "\"" << " to news queue"<< endl;
     }
     if (news.find("weather") != std::string::npos) {
         this->weatherQueue->push(news);
-        cout << "[Dispatcher] " << "pushed \"" << news << "\"" << " to weather queue"<< endl;
+        // cout << "[Dispatcher] " << "pushed \"" << news << "\"" << " to weather queue"<< endl;
     }
     if (news.find("sport") != std::string::npos) {
         this->sportQueue->push(news);
-        cout << "[Dispatcher] " << "pushed \"" << news << "\"" << " to sport queue"<< endl;
+        // cout << "[Dispatcher] " << "pushed \"" << news << "\"" << " to sport queue"<< endl;
     }
 
 }
@@ -52,7 +52,7 @@ void Dispatcher::readFromProducersQueues() {
         msgFromQueue = currentQueue->pop();
 
         if (msgFromQueue == "DONE") {
-            cout << "[Dispatcher] " << "received \"DONE\"" << endl;
+            // cout << "[Dispatcher] " << "received \"DONE\"" << endl;
             this->producerDoneCounter++;
         } else {
             pushToSortedNewsQueue(msgFromQueue);

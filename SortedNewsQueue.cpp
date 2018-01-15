@@ -5,7 +5,7 @@
 #include <iostream>
 #include "SortedNewsQueue.h"
 
-SortedNewsQueue::SortedNewsQueue(const string &queueName) : queueName(queueName) {}
+SortedNewsQueue::SortedNewsQueue(const string &queueName, int maxQueueSize) : queueName(queueName), maxQueueSize(maxQueueSize) {}
 
 string SortedNewsQueue::pop() {
 
@@ -27,8 +27,12 @@ void SortedNewsQueue::push(string item) {
 
     std::unique_lock<std::mutex> mlock(_mutex);
 
+    if (this->queue.size() == this->maxQueueSize){
+        cond.wait(mlock);
+    }
+
     this->queue.push(item);
-    cout << "[" << this->queueName << " SortedNewsQueue] " << "received \"" << item << "\"" << endl;
+    // cout << "[" << this->queueName << " SortedNewsQueue] " << "received \"" << item << "\"" << endl;
     mlock.unlock();
     cond.notify_one();
 }
