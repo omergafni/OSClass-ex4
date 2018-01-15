@@ -19,10 +19,7 @@ protected:
     std::condition_variable cond;
 
 public:
-    // pop an element and return a copy. Block if queue empty.
     virtual string pop() = 0;
-
-    //  push an element to the back of the queue.
     virtual void push(string item) = 0;
 
 };

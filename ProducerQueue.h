@@ -19,8 +19,6 @@ class ProducerQueue : public BlockingQueue {
 public:
 
     ProducerQueue(int maxQueueSize);
-
-    // pop an element and return a copy. Block if queue empty.
     string pop() override;
     void push(string item) override;
 

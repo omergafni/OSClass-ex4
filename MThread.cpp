@@ -6,16 +6,15 @@ using namespace std;
 void* worker(void* arg){
 	MThread* threadObj = (MThread*)arg;
 	threadObj->run();
-	//threadObj->threadId = 0;
-	return NULL;
+	return nullptr;
 }
 
 void MThread::start(){
-	pthread_create(&threadId,NULL,worker,(void*)this);
+	pthread_create(&threadId,nullptr,worker,(void*)this);
 }
 
 void MThread::waitForThread(){
-	pthread_join(threadId,NULL);
+	pthread_join(threadId, nullptr);
 }
 
 MThread::~MThread(){

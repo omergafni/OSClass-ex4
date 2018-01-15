@@ -23,7 +23,6 @@ public:
 public:
     string readFromQueue();
     void printToScreen(string news);
-
     void run() override;
 };
 

@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include "Producer.h"
-#include <cstdlib>
 #include <algorithm>
 
 Producer::Producer(int id,

@@ -9,8 +9,6 @@
 using namespace std;
 int main() {
 
-
-
     vector<ProducerQueue*>* producersQueuesVector = new vector<ProducerQueue*>();
     vector<Producer*>* producersVector = new vector<Producer*>();
 
